@@ -6,16 +6,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+# Path to your oh-my-zsh installation.  export FLYCTL_INSTALL="/home/miguel/.fly"
+  export PATH="$FLYCTL_INSTALL/bin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -78,11 +79,10 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
-	sudo
-	zsh-autosuggestions
-	zsh-syntax-highlighting
-	asdf
+        git
+        asdf
+        zsh-syntax-highlighting
+        zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -112,16 +112,12 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+alias ctsp="pnpm init && mkdir src && pnpm add -D dotenv nodemon ts-node typescript @types/node && pnpm exec tsc --init"
+alias ctspg="git init && echo \"node_modules\ndist\n.env\" > .gitignore && ctsp"
+alias ctspge="ctspg && pnpm add express cors helmet && pnpm add -D @types/express @types/cors"
+# alis ts="pnpm init && pnpm add -D dotenv nodemon ts-node typescript @types/node && mkdir src"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
   export FLYCTL_INSTALL="/home/miguel/.fly"
   export PATH="$FLYCTL_INSTALL/bin:$PATH"
-
-# bun completions
-[ -s "/home/miguel/.bun/_bun" ] && source "/home/miguel/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
